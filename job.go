@@ -18,6 +18,11 @@ func (c *Client) JobGetConfig(ctx context.Context, name string) (cfg []byte, err
 	return
 }
 
+func (c *Client) JobUpdateConfig(ctx context.Context, name string, cfg []byte) (err error) {
+	_, err = c.XMLPost(ctx, fmt.Sprintf("/job/%s/config.xml", name), nil, cfg)
+	return
+}
+
 func (c *Client) JobCreateByConfig(ctx context.Context, name string, cfg []byte) (out []byte, err error) {
 	q := url.Values{}
 	q.Set("name", name)
